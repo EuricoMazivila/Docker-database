@@ -1,0 +1,36 @@
+version: '3.5'
+
+services: 
+  db-postgres:
+    container_name: db-postgresql-img
+    hostname: dbpostgresql
+    image: postgres
+    environment:
+      POSTGRES_USER: "dbpostgresql"
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: "Example"
+    ports:
+      - 5432:5432
+    # volumes:
+    #   - /home/Desktop/Deploy/PostgresSQL/Volume:/var/lib/postgresql/data
+    networks:
+      - postgres-compose-network
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: "example@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "1234"
+    ports: 
+      - 16543:80
+    depends_on: 
+      - db-postgres
+    networks:
+      - postgres-compose-network
+      
+
+networks:
+  postgres-compose-network:
+    driver: bridge
+
+

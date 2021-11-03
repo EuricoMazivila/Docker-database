@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  db-sqlserver: 
+    container_name: sqlserver-db-img
+    hostname: dbsqlserver
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pa55w0rd"
+    ports:
+      - "1433:1433"
+    # volumes:
+    #   - /home/Desktop/Deploy/SQLServer/Volumes/data:/var/opt/mssql/data
+    #   - /home/Desktop/Deploy/SQLServer/Volumes/log:/var/opt/mssql/log
+    #   - /home/Desktop/Deploy/SQLServer/Volumes/secrets:/var/opt/mssql/secrets
+

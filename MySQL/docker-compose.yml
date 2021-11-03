@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+  db-mysql:
+    container_name: db-mysql-img
+    hostname: mysqldb
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "Pa55w0rd"
+      # MYSQL_USER: "mysqldb"
+    ports:
+      - 3306:3306
+    # volumes:
+    #   - /home/Desktop/Deploy/MySQL/Volumes:/var/lib/mysql
+    networks:
+      - mysql-compose-network
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      -  db-mysql
+    networks:
+      - mysql-compose-network  
+
+networks:
+    mysql-compose-network:
+      driver: bridge
+
